@@ -1,9 +1,35 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors }, watch, } = useForm();
-    const onSubmit = data => {
-        console.log(data)
+    const { register, reset, handleSubmit, formState: { errors }, watch, } = useForm();
+    const {createUser, userUpdateProfile} = useContext(AuthContext);
+
+    const handleSignUp = data => {
+        const {name, email, password, photoURL, gender, number ,address} = data;
+        console.log(data);
+
+        createUser(name, email, password, photoURL, gender, number, address)
+
+        .then(result => {
+            const loggedUser = result.user;
+            userUpdateProfile(data.name, data.photoURL)
+            .then(()=>{
+                reset();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Your Account Created Successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     };
 
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/;
@@ -16,7 +42,7 @@ const SignUp = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card flex-shrink-0 w-1/2 shadow-2xl bg-base-100">
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <form onSubmit={handleSubmit(handleSignUp)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>

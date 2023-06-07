@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const {
@@ -6,9 +9,38 @@ const Login = () => {
         register,
         formState: { errors },
     } = useForm();
+    const {user, signIn} = useContext(AuthContext);
+  
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const handleLogin = (data) => {
+        const email = data.email;
+        const password = data.password;
+        console.log(email,password);
+       
+         if(user){
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'You are already logged in.',
+                showConfirmButton: false,
+                timer: 2000
+              });
+              return;
+         }
+
+        signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Login Successful',
+                showConfirmButton: false,
+                timer: 2000
+              })
+        })
+        
     };
     return (
         <div>
@@ -19,7 +51,7 @@ const Login = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card flex-shrink-0 w-1/2 shadow-2xl bg-base-100">
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <form onSubmit={handleSubmit(handleLogin)} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
