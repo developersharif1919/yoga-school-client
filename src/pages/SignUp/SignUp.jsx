@@ -1,38 +1,50 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
     const { register, reset, handleSubmit, formState: { errors }, watch, } = useForm();
-    const {createUser, userUpdateProfile} = useContext(AuthContext);
+    const { createUser, userUpdateProfile, loading } = useContext(AuthContext);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const navigate = useNavigate()
 
     const handleSignUp = data => {
-        const {name, email, password, photoURL, gender, number ,address} = data;
+        const { name, email, password, photoURL, gender, number, address } = data;
         console.log(data);
 
         createUser(name, email, password, photoURL, gender, number, address)
 
-        .then(result => {
-            const loggedUser = result.user;
-            userUpdateProfile(data.name, data.photoURL)
-            .then(()=>{
-                reset();
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Your Account Created Successfully',
-                    showConfirmButton: false,
-                    timer: 2000
-                  });
+            .then(result => {
+                const loggedUser = result.user;
+                userUpdateProfile(data.name, data.photoURL)
+                    .then(() => {
+                        reset();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Your Account Created Successfully',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        navigate('/')
+                    })
             })
-        })
-        .catch(error => {
-            console.log(error)
-        })
+            .catch(error => {
+                console.log(error)
+            })
     };
 
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/;
+
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
@@ -60,23 +72,46 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" className="input input-bordered" placeholder="Enter Your Password" {...register('password', {
-                                    required: 'Password is required.',
-                                    pattern: {
-                                        value: passwordPattern,
-                                        message: 'Password must contain at least one lowercase letter, one uppercase letter, and one special character.',
-                                    },
-                                })} />
+                                <div className="relative form-control">
+                                    <input type={passwordVisible ? "text" : "password"} className="input input-bordered" placeholder="Enter Your Password" {...register('password', {
+                                        required: 'Password is required.',
+                                        pattern: {
+                                            value: passwordPattern,
+                                            message: 'Password must contain at least one lowercase letter, one uppercase letter, and one special character.',
+                                        },
+                                    })} />
+                                    <span
+                                        className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+                                        onClick={togglePasswordVisibility}
+                                    > {passwordVisible ? (
+                                        <FaEyeSlash className="text-2xl"></FaEyeSlash>
+                                    ) : (
+                                        <FaEye className="text-2xl"></FaEye>
+                                    )}
+                                    </span>
+                                </div>
+
                                 {errors.password && <p className="text-red-600">{errors.password.message}</p>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
-                                <input type="password" className="input input-bordered" placeholder="Enter Confirm Password" {...register('confirmPassword', {
-                                    required: 'Please confirm your password.',
-                                    validate: (value) => value === watch('password') || 'Passwords do not match.',
-                                })} />
+                                <div className="relative form-control">
+                                    <input type={passwordVisible ? "text" : "password"} className="input input-bordered" placeholder="Enter Confirm Password" {...register('confirmPassword', {
+                                        required: 'Please confirm your password.',
+                                        validate: (value) => value === watch('password') || 'Passwords do not match.',
+                                    })} />
+                                    <span
+                                        className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+                                        onClick={togglePasswordVisibility}
+                                    > {passwordVisible ? (
+                                        <FaEyeSlash className="text-2xl"></FaEyeSlash>
+                                    ) : (
+                                        <FaEye className="text-2xl"></FaEye>
+                                    )}
+                                    </span>
+                                </div>
                                 {errors.confirmPassword && <p className="text-red-600">{errors.confirmPassword.message}</p>}
                             </div>
                             <div className="form-control">
@@ -109,9 +144,12 @@ const SignUp = () => {
                                 <input type="text" className="input input-bordered" placeholder="Enter Your Address" {...register('address')} />
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-outline btn-primary px-8 py-4">Sign Up</button>
+                                <input className="btn btn-outline btn-primary px-8 py-4" type="submit" value={loading ? "Please wait..." : "Sign Up"}
+                                    disabled={loading} />
                             </div>
                         </form>
+                        <p className="px-8 pb-4"><small>Already Have An Account? <Link to='/login' className="text-red-600 text-lg">Login</Link></small></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

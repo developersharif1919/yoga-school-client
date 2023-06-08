@@ -1,9 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Navbar = () => {
-      const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const [isProfileClicked, setIsProfileClicked] = useState(false);
+
+    const handleProfileClick = () => {
+        setIsProfileClicked(!isProfileClicked);
+    };
     const navItems = <>
         <li>
             <Link to='/'>Home</Link>
@@ -15,7 +20,7 @@ const Navbar = () => {
             <Link to='/'>Classes</Link>
         </li>
         <li>
-            <Link to='/'>Dashboard</Link>
+            <Link to='/dashboard'>Dashboard</Link>
         </li>
         <li>
             <Link to='/signup'>SignUp</Link>
@@ -43,12 +48,35 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
-                        user ? (<button className="btn btn-outline btn-primary px-8 py-4" onClick={logOut}>
-                        Logout
-                      </button>) : (<Link to='/login' className="btn btn-outline btn-primary px-8 py-4">Login</Link>)
-                    }
-                    
+                    {user ? (
+                        <div className="relative">
+                            <div className='flex items-center gap-4'>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                <img
+                                    src={user.photoURL}
+                                    alt="Profile"
+                                    className="w-12 h-12 rounded-full cursor-pointer"
+                                    onClick={handleProfileClick}
+                                />
+                            </div>
+                            {isProfileClicked && (
+                                <button
+                                    className={`btn btn-outline btn-primary absolute right-14 top-10 ${isProfileClicked ? 'block' : 'hidden'}`}
+                                    onClick={logOut}
+                                >
+                                    Logout
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className="btn btn-outline btn-primary px-8 py-4"
+                        >
+                            Login
+                        </Link>
+                    )}
+
                 </div>
             </div>
         </div>

@@ -1,7 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const {
@@ -9,38 +12,51 @@ const Login = () => {
         register,
         formState: { errors },
     } = useForm();
-    const {user, signIn} = useContext(AuthContext);
-  
+    const { user, signIn, loading } = useContext(AuthContext);
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+
+
 
     const handleLogin = (data) => {
         const email = data.email;
         const password = data.password;
-        console.log(email,password);
-       
-         if(user){
+        console.log(email, password);
+
+        if (user) {
             Swal.fire({
                 position: 'center',
                 icon: 'info',
                 title: 'You are already logged in.',
                 showConfirmButton: false,
                 timer: 2000
-              });
-              return;
-         }
+            });
+            return;
+        }
 
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Login Successful',
-                showConfirmButton: false,
-                timer: 2000
-              })
-        })
-        
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Login Successful',
+                    text: 'When you log out, click on your profile picture, and then click the logout button to sign out of your account.',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Cool',
+                    timer: 12000
+                });
+                navigate(from, { replace: true });
+            })
+
+    };
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
     };
     return (
         <div>
@@ -68,21 +84,35 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input
-                                    type="password"
-                                    placeholder="password"
-                                    className="input input-bordered"
-                                    {...register('password', { required: 'Password is required.' })}
-                                />
+                                <div className="relative form-control">
+                                    <input
+                                        type={passwordVisible ? "text" : "password"}
+                                        placeholder="password"
+                                        className="input input-bordered"
+                                        {...register('password', { required: 'Password is required.' })}
+                                    />
+                                    <span
+                                        className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+                                        onClick={togglePasswordVisibility}
+                                    > {passwordVisible ? (
+                                        <FaEyeSlash className="text-2xl"></FaEyeSlash>
+                                    ) : (
+                                        <FaEye className="text-2xl"></FaEye>
+                                    )}
+                                    </span>
+                                </div>
                                 {errors.password && <p className="text-red-600">{errors.password.message}</p>}
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <input className="btn btn-outline btn-primary px-8 py-4" type="submit" value="Login" />
+                                <input className="btn btn-outline btn-primary px-8 py-4" type="submit" value={loading ? "Please wait..." : "Login"}
+                                    disabled={loading} />
                             </div>
                         </form>
+                        <p> <small> New Here? <Link to='/signup'>Create An Account </Link></small></p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
