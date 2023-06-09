@@ -133,7 +133,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Photo</span>
                                 </label>
-                                <input type="text" className="input input-bordered" defaultValue="Enter Your Photo URL" {...register("photoURL")} />
+                                <input type="text" className="input input-bordered" placeholder="Enter Your Photo URL" {...register("photoURL")} />
                             </div>
                             <div className="form-control">
                                 <label className="label">

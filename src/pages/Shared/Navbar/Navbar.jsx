@@ -14,7 +14,7 @@ const Navbar = () => {
             <Link to='/'>Home</Link>
         </li>
         <li>
-            <Link to='/'>Instructors</Link>
+            <Link to='/instructors'>Instructors</Link>
         </li>
         <li>
             <Link to='/'>Classes</Link>
@@ -48,13 +48,18 @@ const Navbar = () => {
                     {user ? (
                         <div className="relative">
                             <div className='flex items-center gap-4'>
-                                    <Link to="/dashboard">Dashboard</Link>
-                                <img
-                                    src={user.photoURL}
-                                    alt="Profile"
-                                    className="w-12 h-12 rounded-full cursor-pointer"
-                                    onClick={handleProfileClick}
-                                />
+                                <Link to="/dashboard">Dashboard</Link>
+                                <div className="avatar online">
+                                    <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img
+                                            src={user.photoURL}
+                                            alt="Profile"
+                                            className="w-12 h-12 rounded-full cursor-pointer"
+                                            onClick={handleProfileClick}
+                                        />
+                                    </div>
+                                </div>
+
                             </div>
                             {isProfileClicked && (
                                 <button

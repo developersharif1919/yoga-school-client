@@ -31,12 +31,11 @@ const AllUsers = () => {
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Yes, I Made'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         if (data.modifiedCount) {
                             refetch();
-
                             setAdminDisabled(true);
                             setInstructorDisabled(false);
                             Swal.fire({
@@ -44,6 +43,7 @@ const AllUsers = () => {
                                 icon: 'success',
                                 title: `${user.name} is an Admin Now`,
                                 showConfirmButton: false,
+                                timer: 1500
                             });
                         }
                     }
@@ -54,6 +54,15 @@ const AllUsers = () => {
 
 
     const handleMakeInstructor = user => {
+       if(user.email === "developersharif1919@gmail.com"){
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Permission Denied",
+            text: "This user cannot be made an instructor.",
+            showConfirmButton: false,
+          });
+       }else{
         fetch(`http://localhost:5000/users/instructor/${user._id}`, {
             method: 'PATCH',
         })
@@ -78,12 +87,14 @@ const AllUsers = () => {
                                 icon: 'success',
                                 title: `${user.name} is Instructor Now`,
                                 showConfirmButton: false,
+                                timer: 1500
                             });
                         }
                     }
                 })
 
             })
+       }
     }
 
 

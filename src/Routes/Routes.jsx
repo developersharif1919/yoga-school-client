@@ -10,6 +10,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../layout/Dashboard";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import Instructors from "../pages/Instructors/Instructors";
 
 
  export const router = createBrowserRouter([
@@ -29,6 +30,10 @@ import PrivateRoute from "./PrivateRoute";
           path:'/login',
           element: <Login></Login>
         },
+        {
+          path:'/instructors',
+          element: <Instructors></Instructors>
+        }
       ]
     },
     {
