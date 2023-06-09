@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { FaHome, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 
 const Dashboard = () => {
@@ -10,7 +11,7 @@ const Dashboard = () => {
     // const isInstructors = false;
 
     const [isAdmin] = useAdmin();
-    const [isInstructors] = useAdmin();
+    const [isInstructor] = useInstructor();
 
 
     return (
@@ -33,9 +34,9 @@ const Dashboard = () => {
                         </>
                     ) : (
                         <>
-                            {isInstructors ? (
+                            {isInstructor ? (
                                 <>
-                                    <li><Link ><FaUsers /> Instructors</Link></li>
+                                    <li><Link to='/dashboard/AddAClass'><FaUsers /> Add A Class</Link></li>
                                 </>
                             ) : (
                                 <>

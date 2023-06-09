@@ -4,7 +4,7 @@ import AllInstructors from "./AllInstructors";
 
 
 const Instructors = () => {
-    const { data: instructors = [] } = useQuery({
+    const { refetch, data: instructors = [] } = useQuery({
         queryKey: ["instructors"],
         queryFn: async () => {
             const queryObj = { role: "instructor" };

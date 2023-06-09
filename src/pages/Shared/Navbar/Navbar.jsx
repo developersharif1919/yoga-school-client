@@ -50,7 +50,7 @@ const Navbar = () => {
                             <div className='flex items-center gap-4'>
                                 <Link to="/dashboard">Dashboard</Link>
                                 <div className="avatar online">
-                                    <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                         <img
                                             src={user.photoURL}
                                             alt="Profile"
