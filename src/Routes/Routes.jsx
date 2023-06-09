@@ -5,7 +5,10 @@ import Main from "../layout/Main";
 import Home from "../pages/Home/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
-import Dashboard from "../pages/Dashboard/Dashboard";
+// import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import Dashboard from "../layout/Dashboard";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 
@@ -26,10 +29,17 @@ import PrivateRoute from "./PrivateRoute";
           path:'/login',
           element: <Login></Login>
         },
+      ]
+    },
+    {
+      path:'/dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children:[
         {
-          path:'/dashboard',
-          element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+          path:'/dashboard/allusers',
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
         }
       ]
     },
+    
   ]);
