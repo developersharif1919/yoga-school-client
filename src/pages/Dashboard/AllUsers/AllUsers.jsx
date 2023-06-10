@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 
 const AllUsers = () => {
@@ -103,6 +104,9 @@ const AllUsers = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Yoga School | All Users</title>
+            </Helmet>
             <h2 className="text-xl">Total Users: {users.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table">

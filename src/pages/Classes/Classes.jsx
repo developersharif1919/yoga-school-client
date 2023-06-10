@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import DisplayClasses from "./DisplayClasses";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 
 const Classes = () => {
@@ -14,6 +14,9 @@ const Classes = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>Yoga School | Classes</title>
+            </Helmet>
             <div className="grid grid-cols-2 gap-5 my-10">
                 {
                     classes.map((singleClass, index) => (

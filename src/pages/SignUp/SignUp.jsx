@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
     const { register, reset, handleSubmit, formState: { errors }, watch, } = useForm();
@@ -62,6 +63,9 @@ const SignUp = () => {
     };
     return (
         <div>
+            <Helmet>
+                <title>Yoga School | Sign Up</title>
+            </Helmet>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse md:justify-between">
                     <div className="text-center w-1/2 lg:text-left">

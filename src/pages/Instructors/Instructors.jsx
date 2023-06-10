@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import AllInstructors from "./AllInstructors";
+import { Helmet } from "react-helmet-async";
 
 
 const Instructors = () => {
@@ -20,6 +21,9 @@ const Instructors = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Yoga School | Instructors</title>
+            </Helmet>
             <h2 className="text-center text-lg uppercase font-bold my-10">Toal Instructors: {instructors.length}</h2>
             <div className="grid grid-cols-2 gap-5 my-10">
                 {instructors.map((instructor) => (
