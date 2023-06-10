@@ -12,8 +12,15 @@ const Dashboard = () => {
     // const isAdmin = true;
     // const isInstructors = false;
 
-    const [isAdmin] = useAdmin();
-    const [isInstructor] = useInstructor();
+    const [isAdmin, isAdminLoading] = useAdmin();
+    const [isInstructor, isInstructorLoading] = useInstructor();
+    if (isAdminLoading || isInstructorLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
 
 
     return (
