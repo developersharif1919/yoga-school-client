@@ -151,7 +151,7 @@ const ManageClasses = () => {
                                 <td>{classItem.instructorName}</td>
                                 <td>{classItem.instructorEmail}</td>
                                 <td>{classItem.availableSeats}</td>
-                                <td>{classItem.price}</td>
+                                <td>${classItem.price}</td>
                                 <td>
                                     <button className="px-4 py-2 text-white" style={{ backgroundColor: getStatusColor(classItem.status) }}>{classItem.status}</button>
                                 </td>
