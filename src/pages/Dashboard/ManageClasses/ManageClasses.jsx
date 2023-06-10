@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -17,6 +18,28 @@ const ManageClasses = () => {
 
     const approveClass = useMutation(async (classId) => {
 
+        await axiosSecure.patch(`/manageClasses/${classId}`, { status: 'Approved' });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Approve This Class",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I Sure'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                refetch();
+                setApprovedClassId(classId);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Aproved Done',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        })
     });
 
     const denyClass = useMutation(async (classId) => {
@@ -29,7 +52,7 @@ const ManageClasses = () => {
         switch (status) {
             case "pending":
                 return "red";
-            case "Approved":
+            case "approved":
                 return "green";
             case "Denied":
                 return "orange";
@@ -90,7 +113,7 @@ const ManageClasses = () => {
                                 <td>
                                     <button
                                         className="btn btn-primary"
-                                        disabled={classItem.status === "Approved" || classItem.status === "Denied"}
+                                        disabled={classItem.status === "approved" || classItem.status === "Denied"}
                                         onClick={() => approveClass.mutate(classItem._id)}
                                     >
                                         Approve
@@ -99,7 +122,7 @@ const ManageClasses = () => {
                                 <td>
                                     <button
                                         className="btn btn-danger"
-                                        disabled={classItem.status === "Denied" || classItem.status === "Approved"}
+                                        disabled={classItem.status === "Denied" || classItem.status === "approved"}
                                         onClick={() => denyClass.mutate(classItem._id)}
                                     >
                                         Deny
