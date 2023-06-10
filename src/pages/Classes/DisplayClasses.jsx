@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const DisplayClasses = ({ singleClass }) => {
-    const { classImage, className, instructorName, availableSeats, price } = singleClass;
+    const { classImage, className, instructorName, availableSeats, price, _id } = singleClass;
+    console.log(singleClass)
     const [currentUser, setCurrentUser] = useState(null);
     const { user } = useContext(AuthContext);
     const currentUserEmail = user ? user.email : '';
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
 
 
     useEffect(() => {
@@ -28,8 +30,28 @@ const DisplayClasses = ({ singleClass }) => {
     const handleSelect = () => {
         if (isLoggedIn()) {
             if (availableSeats > 0) {
-                //TODO Logic for selecting the course
-                console.log('Course selected');
+                      
+                const selectedClass = {selectedClassId: _id, classImage, className, instructorName, availableSeats, price, userEmail: user.email}
+
+                 fetch('http://localhost:5000/selectedClass', {
+                    method:'POST',
+                    headers: {
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify(selectedClass)
+                 })
+                 .then(res => res.json())
+                 .then(data => {
+                    if(data.insertedId){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Class Selected Done',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                 })
             } else {
                 console.log('No available seats');
             }
@@ -41,7 +63,7 @@ const DisplayClasses = ({ singleClass }) => {
                 showConfirmButton: false,
                 timer: 2000
             });
-            navigate('/login')
+            navigate('/login',{state:{from: location}})
         }
     };
     const isLoggedIn = () => {
@@ -73,7 +95,7 @@ const DisplayClasses = ({ singleClass }) => {
                 <button
                     onClick={handleSelect}
                     disabled={isButtonDisabled()}
-                    className="btn btn-primary"
+                    className="btn btn-outline"
                 >
                     Select
                 </button>

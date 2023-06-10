@@ -1,10 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaUsers } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
+import useSelectedClasses from "../hooks/useSelectedClasses";
 
 
 const Dashboard = () => {
+    const [selectedClass] = useSelectedClasses();
 
     // TODO: Load data from dynamic
     // const isAdmin = true;
@@ -42,7 +44,13 @@ const Dashboard = () => {
                                 </>
                             ) : (
                                 <>
-                                    <li><Link ><FaUsers /> Student User</Link></li>
+                                    <li><Link to='/dashboard/StudentHome' ><FaUsers /> Student Home</Link></li>
+                                    <li>
+                                        <Link to='/dashboard/MySelectedClass' >
+                                            My Selected Classes
+                                            <div className="badge badge-secondary mr-20">+{selectedClass?.length || 0}</div>
+                                        </Link>
+                                    </li>
                                 </>
                             )}
                         </>
