@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const ManageClasses = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { data: classes = [], isLoading, isError, refetch } = useQuery(
+    const { data: classes = [], isLoading, refetch } = useQuery(
         ["classes"],
         async () => {
             const res = await axiosSecure.get("/manageClasses");
@@ -13,12 +13,18 @@ const ManageClasses = () => {
         }
     );
 
-    const [approvedClassId, setApprovedClassId] = useState(null);
-    const [deniedClassId, setDeniedClassId] = useState(null);
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+    const [feedbackContent, setFeedbackContent] = useState('');
+    const [feedbackClassId, setFeedbackClassId] = useState('');
+   
+    console.log('ClassID:', feedbackClassId)
 
+
+
+    // Approved Classes
     const approveClass = useMutation(async (classId) => {
 
-        await axiosSecure.patch(`/manageClasses/${classId}`, { status: 'Approved' });
+        await axiosSecure.patch(`/manageClasses/${classId}`, { status: 'approved' });
         Swal.fire({
             title: 'Are you sure?',
             text: "Approve This Class",
@@ -30,7 +36,6 @@ const ManageClasses = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 refetch();
-                setApprovedClassId(classId);
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -42,8 +47,31 @@ const ManageClasses = () => {
         })
     });
 
+
+    // Denied Class
     const denyClass = useMutation(async (classId) => {
 
+        await axiosSecure.patch(`/manageClasses/${classId}`, { status: 'denied' });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Denied This Class",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I Sure'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                refetch();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Denied Done',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        })
     });
 
     // Status Color
@@ -54,16 +82,33 @@ const ManageClasses = () => {
                 return "red";
             case "approved":
                 return "green";
-            case "Denied":
-                return "orange";
+            case "denied":
+                return "darkred";
             default:
                 return "white";
         }
     };
 
+    // Send Feedback
+    const handleSendFeedback = async() => {
+        await axiosSecure.patch(`/feedback/${feedbackClassId}`, { feedback: feedbackContent });
+        setFeedbackClassId(null); 
+        setShowFeedbackModal(false)
+        setFeedbackContent('')
+        refetch();
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Feedback Send Done',
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+    };
+
     return (
         <div>
-            <h2>Manage All Classes</h2>
+            <h2 className="text-center my-16">Manage All Classes</h2>
 
 
 
@@ -112,7 +157,7 @@ const ManageClasses = () => {
                                 </td>
                                 <td>
                                     <button
-                                        className="btn btn-primary"
+                                        className="btn btn-outline px-8 py-4"
                                         disabled={classItem.status === "approved" || classItem.status === "Denied"}
                                         onClick={() => approveClass.mutate(classItem._id)}
                                     >
@@ -121,11 +166,27 @@ const ManageClasses = () => {
                                 </td>
                                 <td>
                                     <button
-                                        className="btn btn-danger"
-                                        disabled={classItem.status === "Denied" || classItem.status === "approved"}
+                                        className="btn btn-outline btn-error px-8 py-4"
+                                        disabled={classItem.status === "denied" || classItem.status === "approved"}
                                         onClick={() => denyClass.mutate(classItem._id)}
                                     >
                                         Deny
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                        className="btn btn-outline btn-warning"
+
+                                        onClick={() => {
+                                            setFeedbackClassId(classItem._id)
+                                            setShowFeedbackModal(true);
+                                        }}
+                                        disabled={
+                                            classItem.status !== "approved" &&
+                                            classItem.status !== "denied"
+                                        }
+                                    >
+                                        Send Feedback
                                     </button>
                                 </td>
                             </tr>
@@ -133,10 +194,37 @@ const ManageClasses = () => {
                     </tbody>
 
                 </table>
+
+                {showFeedbackModal && (
+                    <dialog
+                        id="feedbackModal"
+                        className="modal sm:modal-middle"
+                        open
+                    >
+                        <form onSubmit={handleSendFeedback} method="dialog" className="modal-box">
+                            <h3 className="font-bold text-lg">Send Feedback</h3>
+                            <textarea
+                                placeholder="Enter your feedback here..."
+                                onChange={(e) => setFeedbackContent(e.target.value)}
+                                className="my-4 w-full h-32 p-5"
+                            />
+                            <div className="modal-action">
+                                <input className="btn" type="submit" value="Send" />
+
+                                <button
+                                    className="btn"
+                                    onClick={() => setShowFeedbackModal(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </dialog>
+                )}
             </div>
 
 
-        </div>
+        </div >
     );
 };
 
