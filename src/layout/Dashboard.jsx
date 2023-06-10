@@ -31,6 +31,7 @@ const Dashboard = () => {
                     {isAdmin ? (
                         <>
                             <li><Link to="/dashboard/allusers"><FaUsers /> All Users</Link></li>
+                            <li><Link to="/dashboard/ManageClasses"><FaUsers /> Manage Classes</Link></li>
                         </>
                     ) : (
                         <>
