@@ -13,6 +13,13 @@ const SignUp = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const navigate = useNavigate()
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
 
     const handleSignUp = data => {
         const { name, email, password, photoURL, gender, number, address } = data;

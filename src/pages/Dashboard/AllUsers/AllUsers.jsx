@@ -8,16 +8,13 @@ import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery(['users'], async () => {
+    const {isLoading, data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await axiosSecure.get('/users');
         return res.data;
     })
-    console.log(users)
-
-
+ 
     const [adminDisabled, setAdminDisabled] = useState(false);
     const [instructorDisabled, setInstructorDisabled] = useState(false);
-
 
     const handleMakeAdmin = user => {
         fetch(`https://summer-camp-server-developersharif1919.vercel.app/users/admin/${user._id}`, {
@@ -102,6 +99,14 @@ const AllUsers = () => {
     const handleDelete = user => {
 
     }
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
+
     return (
         <div>
             <Helmet>

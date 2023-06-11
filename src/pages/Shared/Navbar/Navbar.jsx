@@ -37,7 +37,7 @@ const Navbar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <Link to='/'>Music School</Link>
+                    <Link to='/'>Yoga School</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

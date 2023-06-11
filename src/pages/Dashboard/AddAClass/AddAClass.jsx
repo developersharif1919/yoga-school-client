@@ -12,7 +12,14 @@ const AddAClass = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [axiosSecure] = useAxiosSecure();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-
+   
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
     const handleAddClass = async (data) => {
         const formData = new FormData();
         formData.append('image', data.classImage[0]);

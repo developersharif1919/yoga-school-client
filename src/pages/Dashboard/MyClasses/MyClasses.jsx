@@ -34,6 +34,16 @@ const MyClasses = () => {
         setFeedbackContent(feedback);
         setShowFeedbackModal(true);
     };
+
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
+
+
     return (
         <div>
             <Helmet>

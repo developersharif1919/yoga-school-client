@@ -1,4 +1,4 @@
-import React from 'react';
+
 import useSelectedClasses from '../../../hooks/useSelectedClasses';
 
 const MySelectedClass = () => {

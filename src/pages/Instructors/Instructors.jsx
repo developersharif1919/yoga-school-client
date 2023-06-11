@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 
 
 const Instructors = () => {
-    const { refetch, data: instructors = [] } = useQuery({
+    const { isLoading, refetch, data: instructors = [] } = useQuery({
         queryKey: ["instructors"],
         queryFn: async () => {
             const queryObj = { role: "instructor" };
@@ -17,7 +17,13 @@ const Instructors = () => {
             return res.json();
         },
     });
-
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
 
     return (
         <div>

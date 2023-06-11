@@ -13,19 +13,57 @@ const Login = () => {
         register,
         formState: { errors },
     } = useForm();
-    const { user, signIn, loading } = useContext(AuthContext);
+    const { user, signIn } = useContext(AuthContext);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const from = location.state?.from?.pathname || "/";
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <progress className="progress w-56"></progress>
+            </div>
+        )
+    }
 
 
 
     const handleLogin = (data) => {
+        // setEmail(data.email);
+        // setPassword(data.password);
         const email = data.email;
         const password = data.password;
-        console.log(email, password);
+
+        if (email && password) {
+            setLoading(true);
+            signIn(email, password)
+                .then(result => {
+                    const user = result.user;
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Login Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    navigate(from, { replace: true });
+
+                })
+                .catch((error) => {
+                    setError('User Not Found!. Please Enter Correct Email Or Password');
+                })
+                .finally(() => setLoading(false))
+        } else {
+            setError('Please Fill Out Your Email & Password');
+        }
+
+
+
+
 
         if (user) {
             Swal.fire({
@@ -53,6 +91,14 @@ const Login = () => {
                 });
                 navigate(from, { replace: true });
             })
+            .catch(error => {
+                if (error.code === "auth/wrong-password") {
+                    setLoginError("Please enter a valid email and password.");
+                } else {
+                    setLoginError(error.message);
+                }
+                setLoading(false);
+            });
 
     };
 
@@ -109,6 +155,9 @@ const Login = () => {
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
+                                <div className="">
+                                    <p className="text-red-600">{error}</p>
+                                </div>
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-outline btn-primary px-8 py-4" type="submit" value={loading ? "Please wait..." : "Login"}
