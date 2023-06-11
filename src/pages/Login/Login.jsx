@@ -76,30 +76,6 @@ const Login = () => {
             return;
         }
 
-        signIn(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Login Successful',
-                    text: 'When you log out, click on your profile picture, and then click the logout button to sign out of your account.',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Cool',
-                    timer: 12000
-                });
-                navigate(from, { replace: true });
-            })
-            .catch(error => {
-                if (error.code === "auth/wrong-password") {
-                    setLoginError("Please enter a valid email and password.");
-                } else {
-                    setLoginError(error.message);
-                }
-                setLoading(false);
-            });
-
     };
 
     const togglePasswordVisibility = () => {
