@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../providers/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -8,54 +8,56 @@ import { Helmet } from 'react-helmet-async';
 const img_hosting_token = import.meta.env.VITE_image_upload_token;
 
 const AddAClass = () => {
-    const {user, loading} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [axiosSecure] = useAxiosSecure();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
-   
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <progress className="progress w-56"></progress>
-            </div>
-        )
-    }
+    const [isLoading, setLoading] = useState(false);
+    // if (loading) {
+    //     return (
+    //         <div className="flex justify-center items-center h-screen">
+    //             <progress className="progress w-56"></progress>
+    //         </div>
+    //     )
+    // }
     const handleAddClass = async (data) => {
+
         const formData = new FormData();
         formData.append('image', data.classImage[0]);
-      
+
         try {
-          const response = await fetch(img_hosting_url, {
-            method: 'POST',
-            body: formData
-          });
-          
-          const imgResponse = await response.json();
-          
-          if (imgResponse.success) {
-            const imgUrl = imgResponse.data.display_url;
-            const {className, instructorName, instructorEmail, availableSeats, price, classDetails } = data;
-            const newClass = {className, instructorName, instructorEmail, availableSeats, price: parseFloat(price), classDetails, classImage: imgUrl}
-            console.log(newClass)
-            axiosSecure.post('/addClass', newClass)
-            .then(data =>{
-                  
-                if(data.data.insertedId){
-                    reset();
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Your Class Added Successfully',
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                }
-            })
-          }
+            const response = await fetch(img_hosting_url, {
+                method: 'POST',
+                body: formData
+            });
+
+            const imgResponse = await response.json();
+
+            if (imgResponse.success) {
+                const imgUrl = imgResponse.data.display_url;
+                const { className, instructorName, instructorEmail, availableSeats, price, classDetails } = data;
+                const newClass = { className, instructorName, instructorEmail, availableSeats, price: parseFloat(price), classDetails, classImage: imgUrl }
+                setLoading(true);
+                axiosSecure.post('/addClass', newClass)
+                    .then(data => {
+
+                        if (data.data.insertedId) {
+                            reset();
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Your Class Added Successfully',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                        setLoading(false);
+                    })
+            }
         } catch (error) {
-          console.error('Error uploading image:', error);
+            console.error('Error uploading image:', error);
         }
-      };
+    };
 
 
 
@@ -66,7 +68,6 @@ const AddAClass = () => {
             </Helmet>
             <h2>Add a Class</h2>
             <form onSubmit={handleSubmit(handleAddClass)} className='w-full'>
-
 
                 <div className="form-control">
                     <label className="label">
@@ -80,7 +81,7 @@ const AddAClass = () => {
                     <label className="label">
                         <span className="label-text">Instructor Name</span>
                     </label>
-                    <input type="text" className="input input-bordered" value={user.displayName} {...register("instructorName")} readOnly/>
+                    <input type="text" className="input input-bordered" value={user.displayName} {...register("instructorName")} readOnly />
                 </div>
 
                 <div className="form-control">
@@ -117,7 +118,7 @@ const AddAClass = () => {
                     <input type="file" className="input file-input file-input-bordered w-full max-w-xs" placeholder="Enter Image Url" {...register("classImage", { required: 'Class Image Is Required.' })} />
                     {errors.classImage && <p className='text-left text-red-600'>{errors.classImage.message}</p>}
                 </div>
-                <button type="submit" className="btn w-full btn-outline btn-primary px-8 py-4 my-8">Add Class</button>
+                <input type="submit" className="btn w-full btn-outline btn-primary px-8 py-4 my-8"  value={isLoading ? 'Please wait...' : 'Add Class'}/>
             </form>
         </div>
     );

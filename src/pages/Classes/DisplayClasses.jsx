@@ -5,11 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const DisplayClasses = ({ singleClass }) => {
-    const { classImage, className, instructorName, availableSeats, price, _id } = singleClass;
+    const { classImage, className, instructorEmail, instructorName, availableSeats, price, _id } = singleClass;
     console.log(singleClass)
     const [currentUser, setCurrentUser] = useState(null);
     const { user } = useContext(AuthContext);
+
     const currentUserEmail = user ? user.email : '';
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -17,7 +19,7 @@ const DisplayClasses = ({ singleClass }) => {
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
-                const response = await axios.get(`https://summer-camp-server-developersharif1919.vercel.app/currentUser/${currentUserEmail}`);
+                const response = await axios.get(`http://localhost:5000/currentUser/${currentUserEmail}`);
                 setCurrentUser(response.data);
             } catch (error) {
                 console.log(error);
@@ -31,9 +33,9 @@ const DisplayClasses = ({ singleClass }) => {
         if (isLoggedIn()) {
             if (availableSeats > 0) {
                       
-                const selectedClass = {selectedClassId: _id, classImage, className, instructorName, availableSeats, price, userEmail: user.email}
+                const selectedClass = {selectedClassId: _id, classImage, className, instructorName, instructorEmail, availableSeats, price, userEmail: user.email}
 
-                 fetch('https://summer-camp-server-developersharif1919.vercel.app/selectedClass', {
+                 fetch('http://localhost:5000/selectedClass', {
                     method:'POST',
                     headers: {
                         'content-type' : 'application/json'

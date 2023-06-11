@@ -61,10 +61,6 @@ const Login = () => {
             setError('Please Fill Out Your Email & Password');
         }
 
-
-
-
-
         if (user) {
             Swal.fire({
                 position: 'center',

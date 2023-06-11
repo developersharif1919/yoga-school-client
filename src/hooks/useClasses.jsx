@@ -4,7 +4,7 @@ const useClasses = () => {
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('https://summer-camp-server-developersharif1919.vercel.app/approvedClasses')
+        fetch('http://localhost:5000/approvedClasses')
             .then(res => res.json())
             .then(data => {
                 setClasses(data);
