@@ -3,14 +3,16 @@ import axios from 'axios';
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const DisplayClasses = ({ singleClass }) => {
     const { classImage, className, instructorEmail, instructorName, availableSeats, price, _id } = singleClass;
-    console.log(singleClass)
-    const [currentUser, setCurrentUser] = useState(null);
-    const { user } = useContext(AuthContext);
+    const [axiosSecure] = useAxiosSecure();
 
-    const currentUserEmail = user ? user.email : '';
+    const { user } = useContext(AuthContext);
+    const [currentUser, setCurrentUser] = useState();
+
+    const currentUserEmail = user ? user?.email : '';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -19,7 +21,7 @@ const DisplayClasses = ({ singleClass }) => {
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
-                const response = await axios.get(`https://summer-camp-server-developersharif1919.vercel.app/currentUser/${currentUserEmail}`);
+                const response = await axiosSecure.get(`https://summer-camp-server-developersharif1919.vercel.app/currentUser/${currentUserEmail}`);
                 setCurrentUser(response.data);
             } catch (error) {
                 console.log(error);
@@ -28,12 +30,13 @@ const DisplayClasses = ({ singleClass }) => {
 
         fetchCurrentUser();
     }, [currentUserEmail]);
+    console.log('Current User:', currentUser)
 
     const handleSelect = () => {
         if (isLoggedIn()) {
             if (availableSeats > 0) {
                       
-                const selectedClass = {selectedClassId: _id, classImage, className, instructorName, instructorEmail, availableSeats, price, userEmail: user.email}
+                const selectedClass = {selectedClassId: _id, classImage, className, instructorName, instructorEmail, availableSeats, price, userEmail: user?.email}
 
                  fetch('https://summer-camp-server-developersharif1919.vercel.app/selectedClass', {
                     method:'POST',
@@ -76,7 +79,7 @@ const DisplayClasses = ({ singleClass }) => {
     const isButtonDisabled = () => {
         return (
             availableSeats === 0 ||
-            (currentUser && (currentUser.role === 'admin' || currentUser.role === 'instructor'))
+            (isLoggedIn() && (currentUser?.role === 'admin' || currentUser?.role === 'instructor'))
         );
     };
 
