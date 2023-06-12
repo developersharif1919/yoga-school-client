@@ -1,10 +1,11 @@
 
 import Swal from 'sweetalert2';
 import useSelectedClasses from '../../../hooks/useSelectedClasses';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const MySelectedClass = () => {
     const [selectedClass, refetch] = useSelectedClasses();
+    const navigate = useNavigate();
 
     const handleDelete = classId => {
         Swal.fire({
@@ -35,9 +36,9 @@ const MySelectedClass = () => {
         })
     }
 
-    const handlePay = (classId) => {
-
-        console.log(`Pay for class with ID ${classId}`);
+    const handlePay = (classItem) => {
+        const classId = classItem._id;
+       navigate(`/dashboard/payment/${classId}`);
     };
 
     return (
@@ -92,7 +93,7 @@ const MySelectedClass = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        <Link to='/dashboard/payment' className='btn btn-warning px-8 py-2'>Pay</Link>
+                                        <button onClick={()=>{handlePay(classItem)}} className="btn btn-warning px-8 py-2">Pay</button>
                                     </td>
                                 </tr>
                             ))}

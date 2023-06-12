@@ -77,8 +77,10 @@ import Payment from "../pages/Dashboard/Payment/Payment";
           element: <PrivateRoute><StudentHome></StudentHome></PrivateRoute>
         },
         {
-          path:'/dashboard/Payment',
-          element:<PrivateRoute><Payment></Payment></PrivateRoute>
+          path:'/dashboard/Payment/:id',
+          element:<PrivateRoute><Payment></Payment></PrivateRoute>,
+          loader: ({ params }) => fetch(`http://localhost:5000/selectedClass/${params.id}`)
+
         }
       ]
     },
