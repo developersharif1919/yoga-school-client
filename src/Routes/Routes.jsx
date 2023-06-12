@@ -18,6 +18,7 @@ import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
 import Classes from "../pages/Classes/Classes";
 import MySelectedClass from "../pages/Dashboard/MySelectedClass/MySelectedClass";
 import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 
  export const router = createBrowserRouter([
@@ -74,6 +75,10 @@ import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
         {
           path:'/dashboard/StudentHome',
           element: <PrivateRoute><StudentHome></StudentHome></PrivateRoute>
+        },
+        {
+          path:'/dashboard/Payment',
+          element:<PrivateRoute><Payment></Payment></PrivateRoute>
         }
       ]
     },
