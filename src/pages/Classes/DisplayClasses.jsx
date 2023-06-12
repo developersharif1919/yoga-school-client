@@ -19,7 +19,7 @@ const DisplayClasses = ({ singleClass }) => {
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/currentUser/${currentUserEmail}`);
+                const response = await axios.get(`https://summer-camp-server-developersharif1919.vercel.app/currentUser/${currentUserEmail}`);
                 setCurrentUser(response.data);
             } catch (error) {
                 console.log(error);
@@ -35,7 +35,7 @@ const DisplayClasses = ({ singleClass }) => {
                       
                 const selectedClass = {selectedClassId: _id, classImage, className, instructorName, instructorEmail, availableSeats, price, userEmail: user.email}
 
-                 fetch('http://localhost:5000/selectedClass', {
+                 fetch('https://summer-camp-server-developersharif1919.vercel.app/selectedClass', {
                     method:'POST',
                     headers: {
                         'content-type' : 'application/json'

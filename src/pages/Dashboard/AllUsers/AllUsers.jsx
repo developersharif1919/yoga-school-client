@@ -17,7 +17,7 @@ const AllUsers = () => {
     const [instructorDisabled, setInstructorDisabled] = useState(false);
 
     const handleMakeAdmin = user => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://summer-camp-server-developersharif1919.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH',
         })
             .then(res => res.json())
@@ -61,7 +61,7 @@ const AllUsers = () => {
             showConfirmButton: false,
           });
        }else{
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://summer-camp-server-developersharif1919.vercel.app/users/instructor/${user._id}`, {
             method: 'PATCH',
         })
             .then(res => res.json())
