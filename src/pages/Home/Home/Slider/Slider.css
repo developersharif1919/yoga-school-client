@@ -1,0 +1,53 @@
+
+.bg-1{
+    background-image: url('https://img.freepik.com/free-vector/international-yoga-day-young-woman-meditates-abstract-post-ad-banner-vector-illustration_460848-12373.jpg?w=740&t=st=1686755664~exp=1686756264~hmac=6a8d48730abab8204903c43df144b15c896ed3b65d26d5699b0a8420e41f0782');
+}
+.bg-2{
+    background-image: url('https://img.freepik.com/free-photo/young-attractive-fitness-girl-sitting-floor-near_78826-2494.jpg?w=740&t=st=1686755721~exp=1686756321~hmac=c71e61f0636fe8d8b2331236d085d18295a24fd5813b05ea1a1f9c4bd8abf259');
+}
+.bg-3{
+    background-image: url('https://img.freepik.com/premium-photo/woman-doing-yoga-front-window_911712-692.jpg?w=740');
+}
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+  }
+  
+  .slider-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .btn {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .btn.active {
+    opacity: 1;
+  }
+  

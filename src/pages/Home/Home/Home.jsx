@@ -4,6 +4,7 @@ import { AuthContext } from '../../../providers/AuthProvider';
 import PopularClasses from './PopularClasses/PopularClasses';
 import PopularInstructors from './PopularInstructors/PopularInstructors';
 import NewsLetter from './NewsLetter/NewsLetter';
+import Slider from './Slider/Slider';
 
 const Home = () => {
     const {loading} = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Home = () => {
             <Helmet>
                 <title>Yoga School | Home</title>
             </Helmet>
-            <h2>This Is Home</h2>
+            <Slider></Slider>
             <PopularClasses></PopularClasses>
             <PopularInstructors></PopularInstructors>
             <NewsLetter></NewsLetter>
