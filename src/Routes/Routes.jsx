@@ -80,7 +80,7 @@ import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
         {
           path:'/dashboard/Payment/:id',
           element:<PrivateRoute><Payment></Payment></PrivateRoute>,
-          loader: ({ params }) => fetch(`http://localhost:5000/selectedClass/${params.id}`)
+          loader: ({ params }) => fetch(`https://summer-camp-server-developersharif1919.vercel.app/selectedClass/${params.id}`)
         },
         {
           path:'/dashboard/PaymentHistory',

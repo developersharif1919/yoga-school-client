@@ -12,7 +12,7 @@ const Instructors = () => {
             const queryString = JSON.stringify(queryObj);
 
             const res = await fetch(
-                `http://localhost:5000/instructors?query=${queryString}`
+                `https://summer-camp-server-developersharif1919.vercel.app/instructors?query=${queryString}`
             );
             return res.json();
         },
