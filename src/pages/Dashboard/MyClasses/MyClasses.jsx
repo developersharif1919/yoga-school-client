@@ -90,7 +90,7 @@ const MyClasses = () => {
                                 </td>
                                 <td className='text-center'>{classItem.availableSeats}</td>
                                 {/* <td>${classItem.price}</td> */}
-                                <td className='text-center'>{classItem.enrolledStudents > 0 ? classItem.enrolledStudents : 0}</td>
+                                <td className='text-center'>{classItem.enrollmentStudent > 0 ? classItem.enrollmentStudent : 0}</td>
                                 <td className='text-center'>
                                     {(classItem.status === 'denied' || classItem.status === 'approved') && classItem.feedback ? (
                                         <button onClick={() => handleViewFeedback(classItem.feedback)} className='btn btn-outline'>View Feedback</button>

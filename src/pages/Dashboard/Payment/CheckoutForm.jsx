@@ -3,18 +3,17 @@ import './CheckoutForm.css'
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-const CheckoutForm = ({paymentSelectedClass,price}) => {
+const CheckoutForm = ({ paymentSelectedClass, price }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
 
-    const {classImage, className, instructorEmail, instructorName, _id } = paymentSelectedClass;
+    const { classImage, className, instructorEmail, instructorName, _id, selectedClassId } = paymentSelectedClass;
 
-   console.log(paymentSelectedClass)
 
 
     const [cardError, setCardError] = useState('');
@@ -26,11 +25,10 @@ const CheckoutForm = ({paymentSelectedClass,price}) => {
                     setClientSecret(res.data.clientSecret);
                 })
         }
-    }, [price,axiosSecure])
+    }, [price, axiosSecure])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!stripe || !elements) {
             return
         }
@@ -85,22 +83,24 @@ const CheckoutForm = ({paymentSelectedClass,price}) => {
                 instructorEmail,
                 instructorName,
                 classId: _id,
-                status: 'service pending'
+                selectedClassId,
+                status: 'Payment Complete'
 
             }
             axiosSecure.post('/payments', payment)
-                .then(res => {
-                    console.log(res.data);
-                    if (res.data.result.insertedId) {
-                        // display confirm
-                    }
-                })
+            .then(res => {
+                if (res.data.message === 'You have already made a payment for this class') {
+                  alert('You have already made a payment for this class');
+                } else if (res.data.insertResult.insertedId) {
+                  alert('Payment Complete');
+                }
+              });
         }
 
         console.log('paymentIntent', paymentIntent)
 
 
-    }   
+    }
 
     return (
         <div className=''>

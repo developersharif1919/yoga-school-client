@@ -7,7 +7,9 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
       const paymentSelectedClass = useLoaderData();
       const orginalPrice = paymentSelectedClass.price;
-      const price = parseFloat(orginalPrice.toFixed(2));
+      const price = parseFloat(orginalPrice?.toFixed(2));
+
+      console.log('my Id:',paymentSelectedClass)
 
     return (
         <div className="w-full">

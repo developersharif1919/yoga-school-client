@@ -58,6 +58,7 @@ const Dashboard = () => {
                                             <div className="badge badge-secondary mr-20">+{selectedClass?.length || 0}</div>
                                         </Link>
                                     </li>
+                                    <li><Link to='/dashboard/PaymentHistory' ><FaUsers /> Payment History</Link></li>
                                 </>
                             )}
                         </>
