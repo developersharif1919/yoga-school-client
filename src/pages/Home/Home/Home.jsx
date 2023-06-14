@@ -3,6 +3,7 @@ import { Helmet} from 'react-helmet-async';
 import { AuthContext } from '../../../providers/AuthProvider';
 import PopularClasses from './PopularClasses/PopularClasses';
 import PopularInstructors from './PopularInstructors/PopularInstructors';
+import NewsLetter from './NewsLetter/NewsLetter';
 
 const Home = () => {
     const {loading} = useContext(AuthContext);
@@ -21,6 +22,7 @@ const Home = () => {
             <h2>This Is Home</h2>
             <PopularClasses></PopularClasses>
             <PopularInstructors></PopularInstructors>
+            <NewsLetter></NewsLetter>
         </div>
     );
 };
