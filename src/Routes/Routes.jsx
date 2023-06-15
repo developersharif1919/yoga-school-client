@@ -20,6 +20,7 @@ import MySelectedClass from "../pages/Dashboard/MySelectedClass/MySelectedClass"
 import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
+import AdminDashboardHome from "../pages/Dashboard/AdminDashboardHome/AdminDashboardHome";
 
 
  export const router = createBrowserRouter([
@@ -62,6 +63,10 @@ import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
           element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
         },
         {
+          path:'/dashboard/AdminDashboardHome',
+          element: <AdminRoute><AdminDashboardHome></AdminDashboardHome></AdminRoute>
+        },
+        {
           path:'/dashboard/AddAClass',
           element: <InstructorRoute><AddAClass></AddAClass></InstructorRoute>
         },
@@ -86,6 +91,7 @@ import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
           path:'/dashboard/PaymentHistory',
           element: <PrivateRoute><PaymentHistory></PaymentHistory></PrivateRoute>
         }
+        
       ]
     },
     

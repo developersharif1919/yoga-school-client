@@ -52,7 +52,7 @@ const AllUsers = () => {
 
 
     const handleMakeInstructor = user => {
-       if(user.email === "developersharif1919@gmail.com"){
+       if(user.email === "developersharif@gmail.com"){
         Swal.fire({
             position: "center",
             icon: "error",
@@ -119,12 +119,12 @@ const AllUsers = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Photo</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th className="text-center">Photo</th>
+                            <th className="text-center">Name</th>
+                            <th className="text-center">Email</th>
+                            <th className="text-center">Role</th>
+                            <th className="text-center">Role</th>
+                            <th className="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -142,16 +142,17 @@ const AllUsers = () => {
                                 </td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>
+                                <td className="text-center">
                                     {
-                                        user.role === 'admin' ? 'admin' : <button onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-primary" disabled={adminDisabled}>Made Admin</button>
+                                        user.role === 'admin' ? 'admin' : <button style={{fontSize:'16px'}} onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-primary" disabled={adminDisabled}>Made Admin</button>
                                     }
                                 </td>
-                                <td>
+                                <td className="text-center">
                                     {
                                         user.role === 'instructor' ? 'instructor' :
                                             <button
                                                 onClick={() => handleMakeInstructor(user)}
+                                                style={{fontSize:'16px'}}
                                                 className="btn btn-outline btn-primary"
                                                 disabled={instructorDisabled}
                                             >
