@@ -118,6 +118,23 @@ const AdminDashboardHome = () => {
               </div>
 
             </motion.div>
+            <motion.div
+              className="stat card w-[300px] shadow-lg  bg-white px-5 py-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              <div className='flex justify-evenly'>
+                <div className="stat-figure text-secondary">
+                <MdHotelClass className='text-5xl'></MdHotelClass>
+                </div>
+                <div>
+                  <div className="stat-title">Total Approved Classes</div>
+                  <div className="stat-value">{adminStats.approvedClassesCount}</div>
+                </div>
+              </div>
+
+            </motion.div>
           </div>
         )}
       </div>
