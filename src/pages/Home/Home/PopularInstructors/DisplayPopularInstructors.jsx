@@ -1,8 +1,7 @@
-import React from 'react';
+
 
 const DisplayPopularInstructors = ({instructor}) => {
     const {name, photoUrl, email, address, number} = instructor;
-    console.log('Ic:', instructor)
     return (
         <div className="card flex-col md:flex-row lg:flex-row p-5 card-side bg-base-100 shadow-xl items-center border">
         <figure className='w-60 h-60'>

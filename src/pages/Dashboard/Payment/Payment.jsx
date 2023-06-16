@@ -10,8 +10,6 @@ const Payment = () => {
       const orginalPrice = paymentSelectedClass.price;
       const price = parseFloat(orginalPrice?.toFixed(2));
 
-      console.log('my Id:',paymentSelectedClass)
-
     return (
         <div className="w-full">
              <Helmet>

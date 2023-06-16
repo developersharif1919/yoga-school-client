@@ -8,7 +8,7 @@ const PaymentHistory = () => {
     const [axiosSecure] = useAxiosSecure();
     const { user } = useContext(AuthContext);
 
-    const { data: paymentData = [], isLoading, refetch } = useQuery(
+    const { data: paymentData = [], isLoading, } = useQuery(
         ["paymentData"],
         async () => {
             const res = await axiosSecure.get(`/paymentHistory/${user.email}`);
@@ -16,8 +16,6 @@ const PaymentHistory = () => {
         }
     );
 
-
-    console.log('Payment Data:', paymentData)
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-screen">

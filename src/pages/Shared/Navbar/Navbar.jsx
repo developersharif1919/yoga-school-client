@@ -155,7 +155,6 @@ const Navbar = () => {
             <div className="flex">
               <NavLink
                 to="/login"
-                isActive={isActive} activeClassName="activeLink"
                 className="btn btn-outline btn-primary px-8 py-4"
               >
                 Login

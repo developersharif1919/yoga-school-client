@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -22,7 +22,7 @@ const DisplayClasses = ({ singleClass }) => {
         const response = await axiosSecure.get(`https://summer-camp-server-developersharif1919.vercel.app/currentUser/${currentUserEmail}`);
         setCurrentUser(response.data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
@@ -63,7 +63,13 @@ const DisplayClasses = ({ singleClass }) => {
             }
           });
       } else {
-        console.log('No available seats');
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          title: 'No Available Seats',
+          showConfirmButton: false,
+          timer: 2000
+        });
       }
     } else {
       Swal.fire({

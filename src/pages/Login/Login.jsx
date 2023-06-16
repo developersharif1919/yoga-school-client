@@ -136,7 +136,7 @@ const Login = () => {
                                     disabled={loading} />
                             </div>
                         </form>
-                        <p> <small> New Here? <Link to='/signup'>Create An Account </Link></small></p>
+                        <p> <small> New Here? <Link to='/signup' className="text-red-600">Create An Account </Link></small></p>
                         <SocialLogin></SocialLogin>
                     </div>
                 </div>

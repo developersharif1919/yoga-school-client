@@ -18,8 +18,6 @@ const AdminDashboardHome = () => {
     }
   );
 
-  console.log('Admin Stas: ', adminStats)
-
   return (
     <div className="text-center">
       <Helmet>

@@ -118,7 +118,7 @@ const AddAClass = () => {
                     <input type="file" className="input file-input file-input-bordered w-full max-w-xs" placeholder="Enter Image Url" {...register("classImage", { required: 'Class Image Is Required.' })} />
                     {errors.classImage && <p className='text-left text-red-600'>{errors.classImage.message}</p>}
                 </div>
-                <input style={{opacity:'1'}} type="submit" className="btn w-full btn-outline btn-primary px-8 py-4 my-8 opacity-1"  value={isLoading ? 'Please wait...' : 'Add Class'}/>
+                <input style={{opacity:'1'}} type="submit" className="btn w-full btn-outline btn-primary px-8 py-4 my-8"  value={isLoading ? 'Please wait...' : 'Add Class'}/>
             </form>
         </div>
     );

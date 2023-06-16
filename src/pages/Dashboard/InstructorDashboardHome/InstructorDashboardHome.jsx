@@ -20,7 +20,6 @@ const InstructorDashboardHome = () => {
     }
   );
 
-  console.log('Admin Stas: ', instructorStats)
 
   return (
     <div className="text-center">

@@ -18,7 +18,6 @@ const ManageClasses = () => {
     const [feedbackContent, setFeedbackContent] = useState('');
     const [feedbackClassId, setFeedbackClassId] = useState('');
 
-    console.log('ClassID:', feedbackClassId)
 
 
 

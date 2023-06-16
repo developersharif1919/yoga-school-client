@@ -22,7 +22,6 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price })
                 .then(res => {
-                    console.log(res.data.clientSecret)
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -45,12 +44,12 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
         })
 
         if (error) {
-            console.log('error', error)
+            // console.log('error', error)
             setCardError(error.message);
         }
         else {
             setCardError('');
-            console.log('payment method', paymentMethod)
+            // console.log('payment method', paymentMethod)
         }
         setProcessing(true)
 
@@ -68,7 +67,7 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
         );
 
         if (confirmError) {
-            console.log(confirmError);
+            // console.log(confirmError);
         }
         setProcessing(false)
         if (paymentIntent.status === 'succeeded') {
@@ -104,7 +103,6 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
                 });
         }
 
-        console.log('paymentIntent', paymentIntent)
 
 
     }
@@ -135,7 +133,7 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
                 </button>
             </form>
             {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-            {transactionId && <p style={{opacity:'1'}} className="text-green-600 ml-8">{transactionId}</p>}
+            {transactionId && <p style={{opacity:'1'}} className="text-green-600 ml-8">Payment Completed. Transition Id:{transactionId}</p>}
 
         </div>
     );
