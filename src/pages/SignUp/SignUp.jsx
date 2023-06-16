@@ -31,8 +31,8 @@ const SignUp = () => {
                 const loggedUser = result.user;
                 userUpdateProfile(data.name, data.photoURL)
                     .then(() => {
-                        const saveUserData = {name:data.name, email: data.email, photoUrl: data.photoURL, gender: data.gender, number: data.number, address: data.address, password: data.password}
-                        console.log(saveUserData)
+                        const saveUserData = {name:data.name, email: data.email, photoUrl: data.photoURL, gender: data.gender, number: data.number, address: data.address, password: data.password , role: 'student'}
+                        console.log('saveData',saveUserData)
                         fetch('https://summer-camp-server-developersharif1919.vercel.app/users',{
                             method: 'POST',
                             headers: {

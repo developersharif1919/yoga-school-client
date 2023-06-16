@@ -174,6 +174,7 @@ const AllUsers = () => {
                             <th className="text-center">Photo</th>
                             <th className="text-center">Name</th>
                             <th className="text-center">Email</th>
+                            <th className="text-center">Current Role</th>
                             <th className="text-center">Role</th>
                             <th className="text-center">Role</th>
                             <th className="text-center">Action</th>
@@ -194,6 +195,7 @@ const AllUsers = () => {
                                 </td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td>{user.role}</td>
                                 <td className="text-center">
                                     {
                                         user.role === 'admin' ? 'admin' : <button style={{ fontSize: '16px', opacity:'1' }} onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-primary" disabled={adminDisabled}>Made Admin</button>

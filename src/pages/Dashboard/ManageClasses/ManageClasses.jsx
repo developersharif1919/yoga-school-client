@@ -171,7 +171,7 @@ const ManageClasses = () => {
                                 <td>
                                     <button
                                         style={{ opacity: '1' }}
-                                        className="btn btn-outline px-8 py-4"
+                                        className="btn btn-primary px-8 py-4"
                                         disabled={classItem.status === "approved" || classItem.status === "Denied"}
                                         onClick={() => approveClass.mutate(classItem._id)}
                                     >
@@ -181,7 +181,7 @@ const ManageClasses = () => {
                                 <td>
                                     <button
                                         style={{ opacity: '1' }}
-                                        className="btn btn-outline btn-error px-8 py-4"
+                                        className="btn btn-error px-8 py-4"
                                         disabled={classItem.status === "denied" || classItem.status === "approved"}
                                         onClick={() => denyClass.mutate(classItem._id)}
                                     >
