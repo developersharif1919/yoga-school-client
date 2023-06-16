@@ -12,7 +12,7 @@ const Instructors = () => {
             const queryString = JSON.stringify(queryObj);
 
             const res = await fetch(
-                `http://localhost:5000/instructors?query=${queryString}`
+                `https://summer-camp-server-developersharif1919.vercel.app/instructors?query=${queryString}`
             );
             return res.json();
         },
@@ -31,7 +31,7 @@ const Instructors = () => {
                 <title>Yoga School | Instructors</title>
             </Helmet>
             <h2 className="text-center text-lg uppercase font-bold my-10">Toal Instructors: {instructors.length}</h2>
-            <div className="grid grid-cols-2 gap-5 my-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 my-10">
                 {instructors.map((instructor) => (
 
                     <motion.div

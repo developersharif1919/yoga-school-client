@@ -13,12 +13,12 @@ const Slider = () => {
     }, []);
 
     return (
-        <div className="slider-container my-16" style={{ height: '700px' }}>
+        <div className="slider-container my-16 " style={{ height: '700px' }}>
             <div
                 id="slide1"
                 className={`carousel-item bg-1 carousel-bg bg-1 ${slideIndex === 0 ? 'active' : ''}`}
             >
-                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mx-auto items-center justify-between">
+                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mobile-device md:flex-row lg:flex-row mx-auto items-center justify-between">
                     <div className="w-1/2">
                     <img className="" src="https://i.ibb.co/CwJ2Zsr/Screen-Shot-2017-11-26-at-9-22-17-PM.png" alt="Slide 2" />
                     </div>
@@ -41,7 +41,7 @@ const Slider = () => {
                 className={`carousel-item carousel-bg bg-2 ${slideIndex === 1 ? 'active' : ''}`}
 
             >
-                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mx-auto items-center justify-between">
+                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mobile-device  mx-auto items-center justify-between">
                     <div className="w-1/2">
                         <img className="" src="https://i.ibb.co/qm49dZt/Upward-facing-dog-Urdhva-Mukha-Svanasana-art-of-living-blog.jpg" alt="Slide 2" />
                     </div>
@@ -64,7 +64,7 @@ const Slider = () => {
                 id="slide3"
                 className={`carousel-item carousel-bg bg-3 ${slideIndex === 2 ? 'active' : ''}`}
             >
-                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mx-auto items-center justify-between">
+                <div style={{ width: '90%', position: 'relative', top: '0', right: '0' }} className="flex mobile-device  mx-auto items-center justify-between">
                     <div className="w-1/2">
                         <img className="" src="https://i.ibb.co/MhsykX0/Restorative-Yoga-3.jpg" alt="Slide 3" />
                     </div>

@@ -4,7 +4,7 @@ import DisplayPopularInstructors from './DisplayPopularInstructors';
 
 const PopularInstructors = () => {
     const { isLoading, data: popularInstructors = [] } = useQuery(['popularInstructors'], async () => {
-        const res = await fetch('http://localhost:5000/popularInstructors');
+        const res = await fetch('https://summer-camp-server-developersharif1919.vercel.app/popularInstructors');
         return res.json();
       });
     
@@ -18,7 +18,7 @@ const PopularInstructors = () => {
   return (
     <div>
     <h2 className="text-center text-lg uppercase font-bold my-16">Popular Instructors</h2>
-    <div className="grid grid-cols-2 gap-5 my-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 my-10">
               {popularInstructors.map((instructor) => (
 
                   <motion.div

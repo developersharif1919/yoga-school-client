@@ -7,8 +7,8 @@ const NewsLetter = () => {
 
     return (
         <div style={{ border: '2px solid blue' }} className="newsletter  my-16">
-            <h2 className='text-center text-5xl my-5'>Subscribe to Our Newsletter</h2>
-            <form>
+            <h2 className='text-center text-lg md:text-5xl lg:text-5xl my-5'>Subscribe to Our Newsletter</h2>
+            <form className='text-center md:text-left p-5 md:p-0 lg:p-0'>
                 <input type="email" placeholder="Enter your email" />
                 <motion.button
                     type="submit"

@@ -7,7 +7,7 @@ const Classes = () => {
     const {isLoading, refetch, data: classes = [] } = useQuery({
         queryKey: ["classes"],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/approvedClasses');
+            const res = await fetch('https://summer-camp-server-developersharif1919.vercel.app/approvedClasses');
             return res.json();
         },
     });
@@ -24,7 +24,7 @@ const Classes = () => {
              <Helmet>
                 <title>Yoga School | Classes</title>
             </Helmet>
-            <div className="grid grid-cols-2 gap-5 my-10">
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 gap-5 my-10">
                 {
                     classes.map((singleClass, index) => (
                         <DisplayClasses key={index} singleClass={singleClass}></DisplayClasses>

@@ -51,3 +51,18 @@
     opacity: 1;
   }
   
+
+
+
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-device {
+      flex-direction: column!important;
+    }
+  }
+  @media (max-width: 768px) {
+    .mobile-device-height {
+      height: auto!important;
+    }
+  }

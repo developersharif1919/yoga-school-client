@@ -3,7 +3,7 @@ const DisplayPopularClass = ({popularClass}) => {
     const{classImage, className, availableSeats, enrollmentStudent, instructorEmail, instructorName, price} = popularClass;
 
     return (
-        <div className="card card-side bg-base-100 shadow-xl items-center border">
+        <div className="card flex-col md:flex-row lg:flex-row card-side bg-base-100 shadow-xl items-center border">
         <figure className='w-60 h-60'>
             <img src={classImage} alt="Movie" />
         </figure>

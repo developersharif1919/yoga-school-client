@@ -4,7 +4,7 @@ const DisplayPopularInstructors = ({instructor}) => {
     const {name, photoUrl, email, address, number} = instructor;
     console.log('Ic:', instructor)
     return (
-        <div className="card card-side bg-base-100 shadow-xl items-center border">
+        <div className="card flex-col md:flex-row lg:flex-row p-5 card-side bg-base-100 shadow-xl items-center border">
         <figure className='w-60 h-60'>
             <img src={photoUrl} alt="Profile Photo" />
         </figure>
