@@ -3,6 +3,7 @@ import './CheckoutForm.css'
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 const CheckoutForm = ({ paymentSelectedClass, price }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -88,13 +89,19 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
 
             }
             axiosSecure.post('/payments', payment)
-            .then(res => {
-                if (res.data.message === 'You have already made a payment for this class') {
-                  alert('You have already made a payment for this class');
-                } else if (res.data.insertResult.insertedId) {
-                  alert('Payment Complete');
-                }
-              });
+                .then(res => {
+                    if (res.data.message === 'You have already made a payment for this class') {
+                        alert('You have already made a payment for this class');
+                    } else if (res.data.insertResult.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: `Transaction Completed. Transaction Id: ${paymentIntent.id}`,
+                            showConfirmButton: false,
+                            timer: 1500,
+                          });
+                    }
+                });
         }
 
         console.log('paymentIntent', paymentIntent)
@@ -123,12 +130,12 @@ const CheckoutForm = ({ paymentSelectedClass, price }) => {
                         }}
                     />
                 </div>
-                <button className="btn btn-primary btn-sm mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button style={{opacity:'1'}} className="btn btn-secondary" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>
             {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-            {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
+            {transactionId && <p style={{opacity:'1'}} className="text-green-600 ml-8">{transactionId}</p>}
 
         </div>
     );

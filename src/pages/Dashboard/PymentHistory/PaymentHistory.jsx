@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const PaymentHistory = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -26,6 +27,9 @@ const PaymentHistory = () => {
     }
     return (
         <div className='w-full'>
+             <Helmet>
+                <title>Yoga School | Payment History</title>
+            </Helmet>
             <h2 className='text-center my-16 bg-orange-500 py-4 text-white'>My Selected Classes</h2>
             {paymentData.length === 0 ? (
                 <p>You Have No Enrolled Any Classes.</p>

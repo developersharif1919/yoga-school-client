@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaUsers } from "react-icons/fa";
 import { MdAddTask, MdHotelClass, MdModelTraining } from "react-icons/md";
+import { Helmet } from 'react-helmet-async';
 
 const AdminDashboardHome = () => {
 
@@ -21,6 +22,9 @@ const AdminDashboardHome = () => {
 
   return (
     <div className="text-center">
+      <Helmet>
+        <title>Yoga School | Admin Home</title>
+      </Helmet>
       <div className="stats shadow">
         {isLoading ? (
           <>
@@ -56,7 +60,7 @@ const AdminDashboardHome = () => {
             >
               <div className='flex justify-evenly'>
                 <div className="stat-figure text-secondary">
-                 <MdHotelClass className='text-5xl'></MdHotelClass>
+                  <MdHotelClass className='text-5xl'></MdHotelClass>
                 </div>
                 <div>
                   <div className="stat-title">Total Classes</div>
@@ -73,7 +77,7 @@ const AdminDashboardHome = () => {
             >
               <div className='flex justify-evenly'>
                 <div className="stat-figure text-secondary">
-                <MdHotelClass className='text-5xl'></MdHotelClass>
+                  <MdHotelClass className='text-5xl'></MdHotelClass>
                 </div>
                 <div>
                   <div className="stat-title text-lg">Total Selected Classes</div>
@@ -126,7 +130,7 @@ const AdminDashboardHome = () => {
             >
               <div className='flex justify-evenly'>
                 <div className="stat-figure text-secondary">
-                <MdHotelClass className='text-5xl'></MdHotelClass>
+                  <MdHotelClass className='text-5xl'></MdHotelClass>
                 </div>
                 <div>
                   <div className="stat-title">Total Approved Classes</div>

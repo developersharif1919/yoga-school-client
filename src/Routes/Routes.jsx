@@ -21,12 +21,14 @@ import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
 import AdminDashboardHome from "../pages/Dashboard/AdminDashboardHome/AdminDashboardHome";
 import InstructorDashboardHome from "../pages/Dashboard/InstructorDashboardHome/InstructorDashboardHome";
 import StudentDashboardHome from "../pages/Dashboard/StudentDashboardHome/StudentDashboardHome";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
  export const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path:'/',

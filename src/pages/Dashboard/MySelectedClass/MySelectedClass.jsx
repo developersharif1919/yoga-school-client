@@ -2,6 +2,7 @@
 import Swal from 'sweetalert2';
 import useSelectedClasses from '../../../hooks/useSelectedClasses';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const MySelectedClass = () => {
     const [selectedClass, refetch] = useSelectedClasses();
@@ -43,6 +44,9 @@ const MySelectedClass = () => {
 
     return (
         <div>
+             <Helmet>
+                <title>Yoga School | Selected CLasses</title>
+            </Helmet>
             <h2 className='text-center my-16 bg-orange-500 py-4 text-white'>My Selected Classes</h2>
             {selectedClass.length === 0 ? (
                 <p>No classes selected.</p>
@@ -86,6 +90,7 @@ const MySelectedClass = () => {
                                     <td>${classItem.price}</td>
                                     <td>
                                         <button
+                                        style={{opacity:'1'}}
                                             className="btn btn-secondary px-8 py-2"
                                             onClick={() => handleDelete(classItem._id)}
                                         >
@@ -93,7 +98,7 @@ const MySelectedClass = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        <button onClick={()=>{handlePay(classItem)}} className="btn btn-warning px-8 py-2">Pay</button>
+                                        <button style={{opacity:'1'}} onClick={()=>{handlePay(classItem)}} className="btn btn-warning px-8 py-2">Pay</button>
                                     </td>
                                 </tr>
                             ))}
