@@ -4,7 +4,7 @@ import DisplayPopularInstructors from './DisplayPopularInstructors';
 
 const PopularInstructors = () => {
     const { isLoading, data: popularInstructors = [] } = useQuery(['popularInstructors'], async () => {
-        const res = await fetch('https://summer-camp-server-developersharif1919.vercel.app/popularInstructors');
+        const res = await fetch('http://localhost:5000/popularInstructors');
         return res.json();
       });
     

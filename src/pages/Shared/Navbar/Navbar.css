@@ -3,3 +3,17 @@
     color:white;
 
 }
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mobile-visible {
+      display: block!important;
+    }
+  }
+@media (max-width: 768px) {
+    .logo-hide {
+      display: none!important;
+    }
+  }
