@@ -21,6 +21,7 @@ import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
 import AdminDashboardHome from "../pages/Dashboard/AdminDashboardHome/AdminDashboardHome";
+import InstructorDashboardHome from "../pages/Dashboard/InstructorDashboardHome/InstructorDashboardHome";
 
 
  export const router = createBrowserRouter([
@@ -65,6 +66,10 @@ import AdminDashboardHome from "../pages/Dashboard/AdminDashboardHome/AdminDashb
         {
           path:'/dashboard/AdminDashboardHome',
           element: <AdminRoute><AdminDashboardHome></AdminDashboardHome></AdminRoute>
+        },
+        {
+          path:'/dashboard/InstructorDashboardHome',
+          element:<InstructorRoute><InstructorDashboardHome></InstructorDashboardHome></InstructorRoute>
         },
         {
           path:'/dashboard/AddAClass',

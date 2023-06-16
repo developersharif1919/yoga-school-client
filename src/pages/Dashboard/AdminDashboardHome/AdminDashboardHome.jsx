@@ -42,7 +42,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title">Total Users</div>
-                  <div className="stat-value">{adminStats.usersCount}</div>
+                  <div className="stat-value">{adminStats.usersCount || 0}</div>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title">Total Classes</div>
-                  <div className="stat-value">{adminStats.addClassesCount}</div>
+                  <div className="stat-value">{adminStats.addClassesCount || 0}</div>
                 </div>
               </div>
             </motion.div>
@@ -77,7 +77,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title text-lg">Total Selected Classes</div>
-                  <div className="stat-value">{adminStats.selectedClassesCount}</div>
+                  <div className="stat-value">{adminStats.selectedClassesCount || 0}</div>
                 </div>
               </div>
 
@@ -96,7 +96,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title">Total Enrolled Classes</div>
-                  <div className="stat-value">{adminStats.paymentCount}</div>
+                  <div className="stat-value">{adminStats.paymentCount || 0}</div>
                 </div>
               </div>
             </motion.div>
@@ -113,7 +113,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title">Total Instructors</div>
-                  <div className="stat-value">{adminStats.instructorsCount}</div>
+                  <div className="stat-value">{adminStats.instructorsCount || 0}</div>
                 </div>
               </div>
 
@@ -130,7 +130,7 @@ const AdminDashboardHome = () => {
                 </div>
                 <div>
                   <div className="stat-title">Total Approved Classes</div>
-                  <div className="stat-value">{adminStats.approvedClassesCount}</div>
+                  <div className="stat-value">{adminStats.approvedClassesCount || 0}</div>
                 </div>
               </div>
 
