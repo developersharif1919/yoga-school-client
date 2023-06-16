@@ -1,8 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaShoppingCart, FaUsers } from "react-icons/fa";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { FaHome, FaUsers } from "react-icons/fa";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 import useSelectedClasses from "../hooks/useSelectedClasses";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import './Dashboard.css'
 
 
 const Dashboard = () => {
@@ -11,6 +14,8 @@ const Dashboard = () => {
     // TODO: Load data from dynamic
     // const isAdmin = true;
     // const isInstructors = false;
+    const { user } = useContext(AuthContext)
+    const location = useLocation(); // Get the current location using useLocation() hook
 
     const [isAdmin, isAdminLoading] = useAdmin();
     const [isInstructor, isInstructorLoading] = useInstructor();
@@ -23,6 +28,13 @@ const Dashboard = () => {
     }
 
 
+    const profilePhoto = user?.photoURL;
+   
+    const isActive = (path) => {
+        // Check if the current location matches the provided path
+        return location.pathname === path;
+      };
+    
     return (
         <div className="">
             <div className="drawer lg:drawer-open">
@@ -40,28 +52,49 @@ const Dashboard = () => {
 
                         {isAdmin ? (
                             <>
-                                <li><Link to="/dashboard/AdminDashboardHome"><FaUsers /> Dashboard Home</Link></li>
-                                <li><Link to="/dashboard/allusers"><FaUsers /> All Users</Link></li>
-                                <li><Link to="/dashboard/ManageClasses"><FaUsers /> Manage Classes</Link></li>
+                                <div className="w-12 ml-8 my-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img
+                                        src={profilePhoto}
+                                        alt="Profile"
+                                        className="w-12 h-12 rounded-full cursor-pointer"
+                                    />
+                                </div>
+                                <li className='mb-2'><NavLink to="/dashboard/AdminDashboardHome"  isActive={isActive} activeClassName="activeLink"><FaUsers /> Dashboard Home</NavLink></li>
+                                <li className='mb-2'><NavLink to="/dashboard/allusers" isActive={isActive} activeClassName="activeLink" ><FaUsers /> All Users</NavLink></li>
+                                <li><NavLink to="/dashboard/ManageClasses"  isActive={isActive} activeClassName="activeLink"><FaUsers /> Manage Classes</NavLink></li>
                             </>
                         ) : (
                             <>
                                 {isInstructor ? (
                                     <>
-                                        <li><Link to='/dashboard/InstructorDashboardHome'><FaUsers /> Dashboard Home</Link></li>
-                                        <li><Link to='/dashboard/MyClasses'><FaUsers /> MyClass</Link></li>
-                                        <li><Link to='/dashboard/AddAClass'><FaUsers /> Add A Class</Link></li>
+                                        <div className="w-12 ml-8 my-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1">
+                                            <img
+                                                src={profilePhoto}
+                                                alt="Profile"
+                                                className="w-12 h-12 rounded-full cursor-pointer"
+                                            />
+                                        </div>
+                                        <li className='mb-2'><NavLink to='/dashboard/InstructorDashboardHome' isActive={isActive} activeClassName="activeLink"><FaUsers /> Dashboard Home</NavLink></li>
+                                        <li className='mb-2'><NavLink to='/dashboard/MyClasses' isActive={isActive} activeClassName="activeLink"><FaUsers /> MyClass</NavLink></li>
+                                        <li><NavLink to='/dashboard/AddAClass' isActive={isActive} activeClassName="activeLink"><FaUsers /> Add A Class</NavLink></li>
                                     </>
                                 ) : (
                                     <>
-                                        <li><Link to='/dashboard/StudentDashboardHome' ><FaUsers />Dashboard Home</Link></li>
-                                        <li>
-                                            <Link to='/dashboard/MySelectedClass' >
+                                        <div className="w-12 rounded-full ml-8 my-5 ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img
+                                                src={profilePhoto}
+                                                alt="Profile"
+                                                className="w-12 h-12 rounded-full cursor-pointer"
+                                            />
+                                        </div>
+                                        <li className="mb-2"><NavLink to='/dashboard/StudentDashboardHome' isActive={isActive} activeClassName="activeLink" ><FaUsers />Dashboard Home</NavLink></li>
+                                        <li className="mb-2">
+                                            <NavLink to='/dashboard/MySelectedClass' isActive={isActive} activeClassName="activeLink" >
                                                 My Selected Classes
                                                 <div className="badge badge-secondary mr-20">+{selectedClass?.length || 0}</div>
-                                            </Link>
+                                            </NavLink>
                                         </li>
-                                        <li><Link to='/dashboard/PaymentHistory' ><FaUsers /> Payment History</Link></li>
+                                        <li><NavLink to='/dashboard/PaymentHistory' isActive={isActive} activeClassName="activeLink" ><FaUsers /> Payment History</NavLink></li>
                                     </>
                                 )}
                             </>
@@ -69,7 +102,7 @@ const Dashboard = () => {
 
                         <div className="divider"></div>
 
-                        <li><Link to='/'> <FaHome></FaHome> Home</Link></li>
+                        <li><NavLink to='/'> <FaHome></FaHome> Home</NavLink></li>
                     </ul>
 
                 </div>

@@ -1,11 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import './Navbar.css'
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const location = useLocation(); 
 
   const [theme, setTheme] = useState(
     localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
@@ -35,20 +37,25 @@ const Navbar = () => {
       setTheme('light');
     }
   };
+  const isActive = (path) => {
+    // Check if the current location matches the provided path
+    return location.pathname === path;
+  };
+
 
   const navItems = (
     <>
-      <li>
-        <Link to="/">Home</Link>
+      <li className='mr-2'>
+        <NavLink to="/" isActive={isActive} activeClassName="activeLink">Home</NavLink>
       </li>
-      <li>
-        <Link to="/instructors">Instructors</Link>
+      <li className='mr-2'>
+        <NavLink to="/instructors" isActive={isActive} activeClassName="activeLink">Instructors</NavLink>
+      </li >
+      <li className='mr-2'>
+        <NavLink to="/Classes" isActive={isActive} activeClassName="activeLink">Classes</NavLink>
       </li>
-      <li>
-        <Link to="/Classes">Classes</Link>
-      </li>
-      <li>
-        <Link to="/signup">SignUp</Link>
+      <li className='mr-2'>
+        <NavLink to="/signup" isActive={isActive} activeClassName="activeLink">SignUp</NavLink>
       </li>
     </>
   );
@@ -81,7 +88,7 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <Link to="/">Yoga School</Link>
+          <Link to="/" className='font-bold text-2xl' style={{color:'orange'}}>Yoga School</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
@@ -143,12 +150,13 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex">
-              <Link
+              <NavLink
                 to="/login"
+                isActive={isActive} activeClassName="activeLink"
                 className="btn btn-outline btn-primary px-8 py-4"
               >
                 Login
-              </Link>
+              </NavLink>
             </div>
           )}
         </div>

@@ -196,7 +196,7 @@ const AllUsers = () => {
                                 <td>{user.email}</td>
                                 <td className="text-center">
                                     {
-                                        user.role === 'admin' ? 'admin' : <button style={{ fontSize: '16px' }} onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-primary" disabled={adminDisabled}>Made Admin</button>
+                                        user.role === 'admin' ? 'admin' : <button style={{ fontSize: '16px', opacity:'1' }} onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-primary" disabled={adminDisabled}>Made Admin</button>
                                     }
                                 </td>
                                 <td className="text-center">
@@ -204,7 +204,7 @@ const AllUsers = () => {
                                         user.role === 'instructor' ? 'instructor' :
                                             <button
                                                 onClick={() => handleMakeInstructor(user)}
-                                                style={{ fontSize: '16px' }}
+                                                style={{ fontSize: '16px', opacity:'1' }}
                                                 className="btn btn-outline btn-primary"
                                                 disabled={instructorDisabled}
                                             >

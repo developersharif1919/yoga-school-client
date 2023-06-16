@@ -17,7 +17,7 @@ const ManageClasses = () => {
     const [showFeedbackModal, setShowFeedbackModal] = useState(false);
     const [feedbackContent, setFeedbackContent] = useState('');
     const [feedbackClassId, setFeedbackClassId] = useState('');
-   
+
     console.log('ClassID:', feedbackClassId)
 
 
@@ -91,9 +91,9 @@ const ManageClasses = () => {
     };
 
     // Send Feedback
-    const handleSendFeedback = async() => {
+    const handleSendFeedback = async () => {
         await axiosSecure.patch(`/feedback/${feedbackClassId}`, { feedback: feedbackContent });
-        setFeedbackClassId(null); 
+        setFeedbackClassId(null);
         setShowFeedbackModal(false)
         setFeedbackContent('')
         refetch();
@@ -170,6 +170,7 @@ const ManageClasses = () => {
                                 </td>
                                 <td>
                                     <button
+                                        style={{ opacity: '1' }}
                                         className="btn btn-outline px-8 py-4"
                                         disabled={classItem.status === "approved" || classItem.status === "Denied"}
                                         onClick={() => approveClass.mutate(classItem._id)}
@@ -179,6 +180,7 @@ const ManageClasses = () => {
                                 </td>
                                 <td>
                                     <button
+                                        style={{ opacity: '1' }}
                                         className="btn btn-outline btn-error px-8 py-4"
                                         disabled={classItem.status === "denied" || classItem.status === "approved"}
                                         onClick={() => denyClass.mutate(classItem._id)}
@@ -189,6 +191,7 @@ const ManageClasses = () => {
                                 <td>
                                     <button
                                         className="btn btn-outline btn-warning"
+                                        style={{ opacity: '1' }}
 
                                         onClick={() => {
                                             setFeedbackClassId(classItem._id)

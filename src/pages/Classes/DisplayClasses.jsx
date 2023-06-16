@@ -104,6 +104,7 @@ const DisplayClasses = ({ singleClass }) => {
         <p>Price: $ {price}</p>
         <button
           onClick={handleSelect}
+          style={{opacity:'1'}}
           disabled={isButtonDisabled()}
           className="btn btn-warning"
         >

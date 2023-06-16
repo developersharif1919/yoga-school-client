@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
             <div className="footer footer-center p-4 bg-base-300 text-base-content">
                 <div>
-                    <p>Copyright © {currentYear} - All right reserved by ACME Industries Ltd</p>
+                    <p>Copyright © {currentYear} - All right reserved by Yoga School</p>
                 </div>
             </div>
         </footer>

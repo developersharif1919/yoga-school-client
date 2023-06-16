@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 const MyClasses = () => {
     const [axiosSecure] = useAxiosSecure();
     const { user } = useContext(AuthContext)
-    const { data: classes = [], isLoading, refetch } = useQuery(
+    const { data: classes = [], isLoading } = useQuery(
         ["classes"],
         async () => {
             const res = await axiosSecure.get(`/classes/${user.email}`); // Update the API endpoint
@@ -86,21 +86,21 @@ const MyClasses = () => {
                                     {classItem.className}
                                 </td>
                                 <td>
-                                    <button className='btn px-4 py-2 text-white' style={{ backgroundColor: getStatusColor(classItem.status) }}>{classItem.status}</button>
+                                    <button className='btn px-4 py-2 text-white' style={{ backgroundColor: getStatusColor(classItem.status), pointerEvents:'none', opacity:'1' }}>{classItem.status}</button>
                                 </td>
                                 <td className='text-center'>{classItem.availableSeats}</td>
                                 {/* <td>${classItem.price}</td> */}
                                 <td className='text-center'>{classItem.enrollmentStudent > 0 ? classItem.enrollmentStudent : 0}</td>
-                                <td className='text-center'>
+                                <td className='text-center '>
                                     {(classItem.status === 'denied' || classItem.status === 'approved') && classItem.feedback ? (
-                                        <button onClick={() => handleViewFeedback(classItem.feedback)} className='btn btn-outline'>View Feedback</button>
+                                        <button  onClick={() => handleViewFeedback(classItem.feedback)} className='btn'>View Feedback</button>
                                     ) : (
                                         classItem.feedback === null ? 'No Feedback' : ''
                                     )}
                                 </td>
                                 <td className='text-center'>
                                     {classItem.status === 'pending' ? (
-                                        <button className='btn btn-outline'>Update</button>
+                                        <button style={{background:'skyblue',opacity:'1'}} className='btn'>Update</button>
                                     ) : (
                                         '-'
                                     )}
