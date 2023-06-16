@@ -5,7 +5,6 @@ import Main from "../layout/Main";
 import Home from "../pages/Home/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
-// import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../layout/Dashboard";
 import AdminRoute from "./AdminRoute";
@@ -17,11 +16,11 @@ import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
 import Classes from "../pages/Classes/Classes";
 import MySelectedClass from "../pages/Dashboard/MySelectedClass/MySelectedClass";
-import StudentHome from "../pages/Dashboard/StudentHome/StudentHome";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PymentHistory/PaymentHistory";
 import AdminDashboardHome from "../pages/Dashboard/AdminDashboardHome/AdminDashboardHome";
 import InstructorDashboardHome from "../pages/Dashboard/InstructorDashboardHome/InstructorDashboardHome";
+import StudentDashboardHome from "../pages/Dashboard/StudentDashboardHome/StudentDashboardHome";
 
 
  export const router = createBrowserRouter([
@@ -84,8 +83,8 @@ import InstructorDashboardHome from "../pages/Dashboard/InstructorDashboardHome/
           element: <PrivateRoute><MySelectedClass></MySelectedClass></PrivateRoute>
         },
         {
-          path:'/dashboard/StudentHome',
-          element: <PrivateRoute><StudentHome></StudentHome></PrivateRoute>
+          path:'/dashboard/StudentDashboardHome',
+          element: <PrivateRoute><StudentDashboardHome></StudentDashboardHome></PrivateRoute>
         },
         {
           path:'/dashboard/Payment/:id',

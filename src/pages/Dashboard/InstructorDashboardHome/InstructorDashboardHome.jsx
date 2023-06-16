@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { CiCircleRemove } from "react-icons/ci";
 import { FcApproval } from "react-icons/fc";
-import { MdAddTask, MdHotelClass, MdModelTraining, MdPending } from "react-icons/md";
+import {MdHotelClass, MdPending } from "react-icons/md";
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 

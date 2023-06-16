@@ -54,7 +54,7 @@ const Dashboard = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <li><Link to='/dashboard/StudentHome' ><FaUsers /> Student Home</Link></li>
+                                        <li><Link to='/dashboard/StudentDashboardHome' ><FaUsers />Dashboard Home</Link></li>
                                         <li>
                                             <Link to='/dashboard/MySelectedClass' >
                                                 My Selected Classes
