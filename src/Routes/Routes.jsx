@@ -91,7 +91,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
         {
           path:'/dashboard/Payment/:id',
           element:<PrivateRoute><Payment></Payment></PrivateRoute>,
-          loader: ({ params }) => fetch(`https://summer-camp-server-developersharif1919.vercel.app/selectedClass/${params.id}`)
+          loader: ({ params }) => fetch(`http://localhost:5000/selectedClass/${params.id}`)
         },
         {
           path:'/dashboard/PaymentHistory',

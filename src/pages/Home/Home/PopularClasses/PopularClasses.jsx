@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const PopularClasses = () => {
   const { isLoading, data: popularClasses = [] } = useQuery(['popularClasses'], async () => {
-    const res = await fetch('https://summer-camp-server-developersharif1919.vercel.app/popularClasses');
+    const res = await fetch('http://localhost:5000/popularClasses');
     return res.json();
   });
 
